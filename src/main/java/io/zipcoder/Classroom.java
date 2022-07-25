@@ -1,9 +1,6 @@
 package io.zipcoder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Classroom {
 
@@ -70,6 +67,27 @@ public class Classroom {
                 }
             }
         } return students;
+    }
+
+    public Map<Student, String> getGradeBook(){
+        double percentile;
+        Map<Student, String> gradeBook = new HashMap<>();
+        int totalGrades = getStudentsByScore().length;
+        Student[] sortedStudent = this.getStudentsByScore();
+        for (int i = 0; i<totalGrades; i++){
+            percentile = ((i-totalGrades)*(-1))/(totalGrades)*100;
+            if(percentile >= 90){
+                gradeBook.put(sortedStudent[i], "A");
+            } else if (percentile <= 89 && percentile >= 71){
+                gradeBook.put(sortedStudent[i], "B");
+            } else if (percentile <= 70 && percentile >= 50){
+                gradeBook.put(sortedStudent[i], "C");
+            } else if (percentile <= 49 && percentile >= 11){
+                gradeBook.put(sortedStudent[i], "D");
+            } else {
+                gradeBook.put(sortedStudent[i], "F");
+            }
+        }return gradeBook;
     }
 
 }
